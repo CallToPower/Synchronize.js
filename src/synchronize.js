@@ -1,6 +1,6 @@
 /**
  * Synchronize.js
- * Version 1.2.6
+ * Version 1.2.7
  *
  * Copyright (c) 2013-2016, Denis Meyer, calltopower88@googlemail.com
  * All rights reserved.
@@ -1036,6 +1036,7 @@
             .on('sjs:stopBufferChecker', function() {
                 log('SJS: Received \'sjs:stopBufferChecker\' event');
                 window.clearInterval(bufferChecker);
+                checkBuffer = false;
                 bufferCheckerSet = false;
                 isBuffering = false;
             });
