@@ -752,17 +752,11 @@
             for (i = 0; i < videoIds.length; ++i) {
                 var bufferedTimeRange = getBufferTimeRange(videoIds[i]);
                 if (bufferedTimeRange) {
-                    var duration = getDuration(videoIds[i]);
-                    var currTimePlusBuffer = getCurrentTime(videoIds[i]) + bufferInterval;
+                    var currentTime = getCurrentTime(videoIds[i]);
                     var buffered = false;
                     for (var j = 0;
-                        (j < bufferedTimeRange.length) && !buffered; ++j) {
-                        currTimePlusBuffer = (currTimePlusBuffer >= duration) ? duration : currTimePlusBuffer;
-                        if (isInInterval(currTimePlusBuffer,
-                                bufferedTimeRange.start(j),
-                                bufferedTimeRange.end(j) + bufferThreshold)) {
-                            buffered = true;
-                        }
+                         (j < bufferedTimeRange.length) && !buffered; ++j) {
+                        buffered = isInInterval(currentTime, bufferedTimeRange.start(j), bufferedTimeRange.end(j));
                     }
                     allBuffered = allBuffered && buffered;
                     isBuffering = !allBuffered;
